@@ -111,11 +111,12 @@ export function CommandPalette() {
   const recentSearches = useMemo(() => {
     if (typeof window === "undefined") return [];
     try {
+      if (!open || searchQuery) return [];
       return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]").slice(0, 5);
     } catch {
       return [];
     }
-  }, [open, query]);
+  }, [open, searchQuery]);
 
   const openFirst = useCallback(() => {
     if (isCommands) return;

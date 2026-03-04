@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
-import type { BookmarkType as PrismaBookmarkType } from "@prisma/client";
+
+type BookmarkKind = "LINK" | "VIDEO" | "ARTICLE" | "TWEET" | "GITHUB" | "IMAGE" | "DOCUMENT" | "OTHER";
 
 export type BookmarkCardItem = {
   id: string;
@@ -13,7 +14,7 @@ export type BookmarkCardItem = {
   favicon: string | null;
   ogImage: string | null;
   siteName: string | null;
-  type: PrismaBookmarkType | string;
+  type: BookmarkKind | string;
   aiSummary: string | null;
   readTime: number | null;
   createdAt: Date | string;
@@ -21,7 +22,7 @@ export type BookmarkCardItem = {
   tags: { name: string }[];
 };
 
-const TYPE_LABELS: Record<PrismaBookmarkType, string> = {
+const TYPE_LABELS: Record<BookmarkKind, string> = {
   LINK: "Link",
   VIDEO: "Video",
   ARTICLE: "Article",
@@ -53,7 +54,7 @@ const TYPE_SHAPE_COLOR: Record<string, string> = {
 };
 
 function TypeShape({ type, color }: { type: string; color: string }) {
-  const t = type as PrismaBookmarkType;
+  const t = type as BookmarkKind;
   switch (t) {
     case "VIDEO":
       return (
@@ -157,7 +158,7 @@ export function BookmarkCard({
     </div>
   ) : null;
 
-  const typeKey = (bookmark.type as PrismaBookmarkType) || "OTHER";
+  const typeKey = (bookmark.type as BookmarkKind) || "OTHER";
   const bgColor = TYPE_BG_COLOR[typeKey] ?? TYPE_BG_COLOR.OTHER;
   const shapeColor = TYPE_SHAPE_COLOR[typeKey] ?? TYPE_SHAPE_COLOR.OTHER;
 
@@ -419,7 +420,7 @@ export function BookmarkCard({
               {bookmark.siteName || new URL(bookmark.url).hostname}
             </span>
             <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-faint text-muted">
-              {TYPE_LABELS[bookmark.type as PrismaBookmarkType] ?? bookmark.type}
+              {TYPE_LABELS[bookmark.type as BookmarkKind] ?? bookmark.type}
             </span>
             <span className="font-mono text-xs text-muted">{dateStr}</span>
           </div>
@@ -498,7 +499,7 @@ export function BookmarkCard({
             {bookmark.siteName || new URL(bookmark.url).hostname}
           </span>
           <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-faint text-muted">
-            {TYPE_LABELS[bookmark.type as PrismaBookmarkType] ?? bookmark.type}
+            {TYPE_LABELS[bookmark.type as BookmarkKind] ?? bookmark.type}
           </span>
           <span className="font-mono text-xs text-muted">{dateStr}</span>
         </div>
