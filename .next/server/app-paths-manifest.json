@@ -1,0 +1,5 @@
+{
+  "/api/bookmarks/ingest/route": "app/api/bookmarks/ingest/route.js",
+  "/api/bookmarks/[id]/route": "app/api/bookmarks/[id]/route.js",
+  "/vault/page": "app/vault/page.js"
+}

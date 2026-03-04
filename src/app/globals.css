@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Notify-style, light and playful */
+  --bg: #bfe5f2;          /* soft aqua page background */
+  --surface: #fff2d9;     /* warm card background */
+  --surface-2: #ffe0c2;   /* stronger card / sidebar background */
+  --border: #f1c29c;      /* peach border */
+  --border-hover: #e3af83;/* slightly darker on hover */
+  --text: #1f2a36;        /* dark slate text */
+  --muted: #5f6c80;       /* muted copy */
+  --faint: #d2edf6;       /* subtle separators / chips */
+  --accent: #ff4fa3;      /* hotpink accent */
+  --hotpink: #ff4fa3;
+  --red: #ef476f;
+  --green: #4caf50;
+  --blue: #118ab2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-feature-settings: normal;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Noise texture for auth page */
+.noise-bg {
+  position: relative;
+}
+
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* Reading mode article content */
+.reading-article p {
+  margin-bottom: 1em;
+}
+.reading-article h2 {
+  font-size: 1.25em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.reading-article a {
+  color: var(--blue);
+}
+.reading-article img {
+  max-width: 100%;
+  height: auto;
+}
